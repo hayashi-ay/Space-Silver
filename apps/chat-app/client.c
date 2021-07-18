@@ -26,8 +26,8 @@ int	main(void)
 
 	memset(&server, 0, sizeof(server));
 	server.sin_family = AF_INET;
-	server.sin_addr.s_addr = htonl(INADDR_ANY);
 	server.sin_port = htons(PORT);
+	memcpy(&server.sin_addr, server_ent->h_addr, server_ent->h_length);
 
 	soc = socket(AF_INET, SOCK_STREAM, 0);
 	if (soc < 0)
