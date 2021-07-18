@@ -1,10 +1,21 @@
-#include "libs/games/games.h"
+#include "games.h"
+#include <stdlib.h>
 
 int	main(void)
 {
-    // 接続受付
+	int			soc;
+	const char	server_stone = 'o';
+	const char	client_stone = 'x';
+	const int	port = 9999;
 
-    // 盤面の初期化
+	soc = setup_server(port);
+	if (soc == -1)
+	{
+		exit(1);
+	}
+	fprintf(stdout, "Successfully Connected!\n");
+	init_game(soc, server_stone, client_stone);
 
-    // ゲームの終了処理
+	finalize_game();
+	fprintf(stdout, "Thank you for playing!\n");
 }
