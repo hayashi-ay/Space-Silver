@@ -17,6 +17,11 @@ int	setup_server(int	port)
 		perror("socket");
 		return (-1);
 	}
+	if (bind(soc_waiting, (struct sockaddr *)&me, sizeof(me)) == -1)
+	{
+		perror("bind");
+		return (-1);
+	}
 	listen(soc_waiting, 1);
 	fprintf(stdout, "Please wait for a client to connect\n");
 	soc = accept(soc_waiting, NULL, NULL);
@@ -40,7 +45,7 @@ int	setup_client(int	port, char	*hostname)
 	memset(&server, 0, sizeof(server));
 	server.sin_family = AF_INET;
 	server.sin_port = htons(port);
-	memcpy(&server.sin_addr, server_ent->h_addr, server_ent->h_length);
+	memcpy(&server.sin_addr, server_ent->h_addr_list[0], server_ent->h_length);
 
 	soc = socket(AF_INET, SOCK_STREAM, 0);
 	if (soc < 0)
