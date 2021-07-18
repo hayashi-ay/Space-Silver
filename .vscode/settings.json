@@ -7,5 +7,9 @@
         "EMPTY_LINE_FUNCTION",
         "TOO_MANY_LINES",
         "TOO_MANY_VARS_FUNC",
-    ]
+    ],
+	"[c]": {
+		"editor.insertSpaces": false,
+		"editor.tabSize": 4,
+	},
 }
