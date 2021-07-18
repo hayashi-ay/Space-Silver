@@ -2,11 +2,11 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 build:
-	$(CC) $(CFLAGS) -o server server.c
-	$(CC) $(CFLAGS) -o client client.c
+	$(CC) $(CFLAGS) -o server.o server.c
+	$(CC) $(CFLAGS) -o client.o client.c
 
 clean:
-	rm client server
+	rm client.o server.o
 
 re:	clean build
 
