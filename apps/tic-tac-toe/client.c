@@ -17,6 +17,18 @@ int	main(void)
 	fprintf(stdout, "Successfully Connected!\n");
 	init_game(soc, server_stone, client_stone);
 
+	while (1)
+	{
+		show_game();
+		fprintf(stdout, "Your turn\n");
+		if (my_turn() == -1)
+			break ;
+		show_game();
+		fprintf(stdout, "Peer turn\n");
+		if (peer_turn() == -1)
+			break ;
+	}
+
 	finalize_game();
 	fprintf(stdout, "Thank you for playing!\n");
 }
