@@ -1,6 +1,6 @@
 {
     "files.associations": {
-        "socket.h": "c"
+        "*.h": "c"
     },
     "codam-norminette-3.ignoreErrors": [
         "SPACE_EMPTY_LINE",
