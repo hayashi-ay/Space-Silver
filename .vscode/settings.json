@@ -7,6 +7,9 @@
         "EMPTY_LINE_FUNCTION",
         "TOO_MANY_LINES",
         "TOO_MANY_VARS_FUNC",
+        "LINE_TOO_LONG",
+        "TOO_MANY_ARGS",
+        "TOO_MANY_FUNCS",
     ],
 	"[c]": {
 		"editor.insertSpaces": false,
