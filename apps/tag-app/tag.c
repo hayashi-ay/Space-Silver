@@ -49,7 +49,7 @@ void	init_tag(int soc, char	mc,	int	mx, int	my, char	pc, char	px, char	py)
 
 	initscr();
 	signal(SIGINT, finalize);
-	g_win = newwin(MAX_X + 2, MAX_Y + 2, 0, 0);
+	g_win = newwin(MAX_Y + 2, MAX_X + 2, 0, 0);
 	box(g_win, '|', '-');
 
 	cbreak();
@@ -63,6 +63,9 @@ void	loop_tag(void)
 	int		exist_socket_input;
 	int		c;
 	int		flag;
+
+	show(&g_me);
+	show(&g_peer);
 	
 	flag = 1;
 	while (flag)
@@ -111,6 +114,8 @@ void	show(t_player	*p)
 {
 	wmove(g_win, p->y, p->x);
 	waddch(g_win, p->c);
+	// カーソルの位置を戻して文字と重なるように
+	wmove(g_win, p->y, p->x);
 	wrefresh(g_win);
 }
 
@@ -123,24 +128,26 @@ void	hide(t_player	*p)
 int	update(t_player	*p, int	c)
 {
 	if (c == g_keymaps.up)
-		p->x = max(p->x - 1, MIN_X);
-	else if (c == g_keymaps.down)
-		p->x = min(p->x - 1, MAX_X);
-	else if (c == g_keymaps.right)
-		p->y = min(p->y + 1, MAX_Y);
-	else if (c == g_keymaps.left)
 		p->y = max(p->y - 1, MIN_Y);
+	else if (c == g_keymaps.down)
+		p->y = min(p->y + 1, MAX_Y);
+	else if (c == g_keymaps.right)
+		p->x = min(p->x + 1, MAX_X);
+	else if (c == g_keymaps.left)
+		p->x = max(p->x - 1, MIN_X);
 	else if (c == g_keymaps.quit)
+	{
+		g_buf[0] = g_keymaps.quit;
 		return (0);
-	else 
-		return (1);
+	}
+		
 	sprintf(g_buf, "%d %d", p->x, p->y);
 	return (1);
 }
 
 int	interpret(t_player *p)
 {
-	if (g_buf[0] == 'q')
+	if (g_buf[0] == g_keymaps.quit)
 		return (0);
 	sscanf(g_buf, "%d %d", &p->x, &p->y);
 	return (1);
