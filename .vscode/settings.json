@@ -15,5 +15,9 @@
 	"[c]": {
 		"editor.insertSpaces": false,
 		"editor.tabSize": 4,
-	},
+    },
+    "cSpell.words": [
+        "mserver",
+        "socket"
+    ],
 }
